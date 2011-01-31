@@ -1,0 +1,27 @@
+<h1>Listing rankings</h1>
+
+<table>
+  <tr>
+    <th>App id</th>
+    <th>Votes</th>
+    <th>Updated</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @rankings.each do |ranking| %>
+  <tr>
+    <td><%= ranking.app_id %></td>
+    <td><%= ranking.votes %></td>
+    <td><%= time_ago_in_words(ranking.updated_at) %></td>
+    <td><%= link_to 'Show', ranking %></td>
+    <td><%= link_to 'Edit', edit_ranking_path(ranking) %></td>
+    <td><%= link_to 'Destroy', ranking, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Ranking', new_ranking_path %>
