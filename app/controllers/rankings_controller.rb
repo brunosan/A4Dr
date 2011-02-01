@@ -42,12 +42,12 @@ class RankingsController < ApplicationController
   def create
 
     @votes= -1
+    @app=params[:ranking][:app_id]
     url='http://appsfordevelopment.challengepost.com/submissions/'+@app.to_s
     html=open(url) {|f| f.read } rescue '404 error'
     doc = Nokogiri::HTML(html)
     v=doc.xpath("//ul[@class='vote-button']/li[1]/p/text()").to_s.split.first
     @votes=v.to_i
-    @app=params[:ranking][:app_id]
 
     @ranking = Ranking.new(:app_id => @app, :votes =>@votes )
       if @ranking.save
